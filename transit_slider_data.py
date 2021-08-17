@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import numpy as np
 from bokeh.io import curdoc
 from bokeh.layouts import row, column
@@ -15,9 +16,11 @@ from models import get_light_curve
 # * reduced chi^2 shown
 # * separate plot showing residuals
 
-transit_data_path = "/Users/vxh710/PhD/outreach/in2science/exoplanet-sliders/transit_data.csv"
+current_dir = os.path.dirname(__file__)
+filename = os.path.join(current_dir, 'transit_data.csv')
+#transit_data_path = "/Users/vxh710/PhD/outreach/in2science/exoplanet-sliders/transit_data.csv"
 
-x, ydat = np.loadtxt(transit_data_path, unpack=True, delimiter=',',
+x, ydat = np.loadtxt(filename, unpack=True, delimiter=',',
         usecols=(0,1))
 
 

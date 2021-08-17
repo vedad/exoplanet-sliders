@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import numpy as np
 from bokeh.io import curdoc
 from bokeh.layouts import row, column
@@ -9,8 +10,10 @@ from bokeh.plotting import figure
 #from ell.utils import models
 from models import get_radial_velocity
 
-data_path = "/Users/vxh710/PhD/outreach/in2science/exoplanet-sliders/rv_data.csv"
-xdat, ydat, yerrdat = np.loadtxt(data_path, unpack=True, delimiter=',')
+current_dir = os.path.dirname(__file__)
+filename = os.path.join(current_dir, 'rv_data.csv')
+#data_path = "/Users/vxh710/PhD/outreach/in2science/exoplanet-sliders/rv_data.csv"
+xdat, ydat, yerrdat = np.loadtxt(filename, unpack=True, delimiter=',')
 
 upper = ydat + yerrdat
 lower = ydat - yerrdat
