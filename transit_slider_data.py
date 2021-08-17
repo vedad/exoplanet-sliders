@@ -6,7 +6,8 @@ from bokeh.layouts import row, column
 from bokeh.models import ColumnDataSource
 from bokeh.models.widgets import Slider, TextInput
 from bokeh.plotting import figure
-from ell.utils import models
+#from ell.utils import models
+from models import get_light_curve
 
 # TODO:
 # * red line across y axis to indicate location of T0
@@ -20,7 +21,7 @@ x, ydat = np.loadtxt(transit_data_path, unpack=True, delimiter=',',
         usecols=(0,1))
 
 
-y = models.get_light_curve(x, 2, 5, 4, 0.1, 90, 
+y = get_light_curve(x, 2, 5, 4, 0.1, 90, 
                             ld='quad',
                             ustar=[0.4,0.3],
                             grid_1='very_sparse', grid_2='very_sparse')
@@ -96,7 +97,7 @@ def update_data(attrname, old, new):
         
         in_transit = np.array((phase > -0.7*t14/P) & (phase < 0.7*t14/P), dtype=int)
 
-        _y = models.get_light_curve(_x, P, t0, aor, ror, incl,
+        _y = get_light_curve(_x, P, t0, aor, ror, incl,
                             ld='quad',
                             ustar=[0.4,0.3],
                             grid_1='very_sparse',

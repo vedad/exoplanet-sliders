@@ -6,7 +6,8 @@ from bokeh.layouts import row, column
 from bokeh.models import ColumnDataSource, Whisker
 from bokeh.models.widgets import Slider, TextInput
 from bokeh.plotting import figure
-from ell.utils import models
+#from ell.utils import models
+from models import get_radial_velocity
 
 data_path = "/Users/vxh710/PhD/outreach/in2science/exoplanet-sliders/rv_data.csv"
 xdat, ydat, yerrdat = np.loadtxt(data_path, unpack=True, delimiter=',')
@@ -26,7 +27,7 @@ incl_start = 90
 K_start = 10
 
 
-y = models.get_radial_velocity(x, P_start, t0_start, incl_start, K_start)
+y = get_radial_velocity(x, P_start, t0_start, incl_start, K_start)
 
 source = ColumnDataSource(data = dict(x = x, y = y))
 
@@ -73,7 +74,7 @@ def update_data(attrname, old, new):
     P = period.value
     K = amplitude.value
 
-    _y = models.get_radial_velocity(_x, P, t0, 90, K)
+    _y = get_radial_velocity(_x, P, t0, 90, K)
     source.data = dict(x = _x, y = _y)
 
 
